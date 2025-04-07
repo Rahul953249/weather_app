@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\WeatherModel;
+use CodeIgniter\Controller;
 
 class WeatherController extends BaseController
 {
@@ -28,6 +29,30 @@ class WeatherController extends BaseController
             'city' => $data['city'],
             'temperature' => $data['temperature'],
             'condition' => $data['condition']
+        ]);
+
+        return $this->response->setJSON(['status' => 'success']);
+    }
+
+    public function details()
+    {
+        return view('weather_details');
+    }
+
+    public function saveWeatherDetails()
+    {
+        $data = $this->request->getJSON(true);
+        $db = \Config\Database::connect();
+        $builder = $db->table('detailed_weather_logs');
+
+        $builder->insert([
+            'city' => $data['city'],
+            'temperature' => $data['temperature'],
+            'humidity' => $data['humidity'],
+            'wind_speed' => $data['wind_speed'],
+            'condition' => $data['condition'], // make sure to use backticks or rename the column if necessary
+            'sunrise_time' => $data['sunrise'],
+            'sunset_time' => $data['sunset']
         ]);
 
         return $this->response->setJSON(['status' => 'success']);

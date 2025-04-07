@@ -20,3 +20,12 @@ $routes->post('/save-weather', 'WeatherController::saveWeather');
 
 // Optional: if you plan to view logs in a table later
 $routes->get('/weather/show', 'WeatherController::show');
+
+$routes->get('/register', 'AuthController::register');
+$routes->post('/registerSubmit', 'AuthController::registerSubmit');
+$routes->get('/login', 'AuthController::login');
+$routes->post('/loginSubmit', 'AuthController::loginSubmit');
+$routes->get('/logout', 'AuthController::logout');
+
+$routes->get('/weather-details', 'WeatherController::details');
+$routes->post('/save-weather-details', 'WeatherController::saveWeatherDetails');
